@@ -16,8 +16,8 @@ Une application interactive pour visualiser le cours du BTC/USD et explorer des 
 - Graphique interactif du cours historique du BTC.
 - 100 simulations Monte Carlo (ajustables) calculées sur la base de la volatilité et d'un objectif de prix.
 - **Ligne de moyenne** : affichage en vert gras de la trajectoire moyenne attendue.
-- **Métriques en temps réel** : affichage du prix actuel du BTC et du prix cible simulé sur le côté.
-- Paramètres personnalisables : période historique, période de prédiction, nombre de simulations, évolution cible, volatilité.
+- **Métriques en temps réel** : affichage du prix actuel du BTC et du prix cible simulé, centré verticalement.
+- Paramètres personnalisables : période historique, période de prédiction, nombre de simulations, évolution cible, volatilité (calculée automatiquement par défaut).
 
 ### Comment lancer l'application
 ```bash

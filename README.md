@@ -1,60 +1,50 @@
 # Renta Mining V2
 
-Bitcoin mining profitability and ROI simulator.
+Simulateur industriel complet de rentabilité et ROI pour le minage de Bitcoin.
 
-## Features
-- Real-time mining profitability calculation.
-- Net Profit and ROI simulation.
-- XPF to USD conversion for electricity costs.
-- CAPEX and OPEX integration.
+## Fonctionnalités Clés
+- **Simulations Monte Carlo Multi-niveaux** : Prix du BTC, Difficulté de minage, et Valeur des récompenses en USD/XPF.
+- **Analyse de Rentabilité Triple** :
+    - **Revenu Théorique** : Basé sur le hashrate et la difficulté.
+    - **Revenu Brut** : Intègre les frais de Pool et le taux de rejet.
+    - **Profit Net** : Déduit l'OPEX électrique (ajusté par l'Uptime et le PUE).
+- **Gestion Financière Complète (XPF/EUR)** :
+    - Saisie des **CAPEX** (Machines, Infrastructure, Ingénierie) en Euros.
+    - Saisie des **OPEX Fixes** (Maintenance, Assurance, Supervision) en Euros.
+    - Conversion automatique en **Franc Pacifique (XPF)**.
+- **Analyse de ROI** : Graphique de flux de trésorerie cumulé avec estimation automatique de la date du **Point Mort**.
+- **Visualisation des Coûts** : Pie Chart de répartition des charges mensuelles (Élec vs Fixes).
 
-## Streamlit Application: Evaluation rentabilité projet
+## Architecture de l'Application
 
-Une application interactive pour visualiser le cours du BTC/USD et explorer des scénarios futurs via des simulations de Monte Carlo.
+L'application Streamlit est structurée en 7 lignes synchronisées pour une lecture fluide du "funnel" de minage :
 
-### Fonctionnalités
-- Graphique interactif du cours historique du BTC.
-- 100 simulations Monte Carlo (ajustables) calculées sur la base de la volatilité et d'un objectif de prix.
-- **Visualisation des Récompenses par Bloc** :
-    - Graphique à double axe Y (BTC et USD).
-    - Simulation Monte Carlo de la valeur future du bloc en USD (basée sur le prix simulé).
-    - Tracé en "escalier" (stairs) pour refléter fidèlement l'impact discret des Halvings.
-- **Modèle de Difficulté Avancé** :
-    - Gestion de l'inertie (lag) pour refléter le délai de déploiement du hashrate.
-    - Ajout d'une composante stochastique (bruit aléatoire) pour une divergence immédiate des trajectoires.
-- **Interface Utilisateur Premium** :
-    - Mise en page par lignes avec alignement parfait des zones de tracé.
-    - Indicateur visuel "Aujourd'hui" (ligne verticale pointillée) sur tous les graphiques.
-    - Thématique de couleurs harmonisée (bleu pour le prix, orange pour la difficulté, rouge/cyan pour les récompenses).
-    - Métriques minimalistes alignées verticalement.
-- **Interface Intuitive** : Les paramètres sont en haut, suivis de deux lignes (Prix et Difficulté). Chaque ligne contient son propre graphique et ses métriques (Actuel/Cible) à droite.
-- **Légendes Optimisées** : Les légendes sont placées à l'intérieur des graphiques en haut à gauche.
-- **Paramètres de Difficulté** : Réglage de la sensibilité et de l'inertie (en jours) en haut de la page.
+1. **Cours BTC/USD** : Historique et prédictions MC (Thème bleu).
+2. **Difficulté de Minage** : Modèle prédictif basé sur le prix avec inertie et stochastique (Thème orange).
+3. **Récompenses par Bloc** : Visualisation des Halvings et valeur en USD (Thème rouge/cyan).
+4. **Revenu Théorique** : Potentiel de gain pur en BTC & XPF (Thème violet).
+5. **Revenu Brut** : Revenu net de frais de pool et rejets (Thème orangé/or).
+6. **Profit Net** : Revenu après déduction de l'OPEX électrique (Thème vert).
+7. **ROI & Cash Flow** : Courbe de retour sur investissement partant du CAPEX initial (Thème blanc/citron).
 
-- **Simulation de Difficulté** : Ajout d'un second graphique montrant l'historique et la prédiction de la difficulté de minage.
-- **Modèle avec Inertie** : La difficulté suit l'évolution du prix du BTC avec une sensibilité et un retard (inertie) paramétrables.
-- **Nuage Monte Carlo** : Visualisation de l'incertitude sur la difficulté future.
-- **Paramètres de Difficulté** : Réglage de la sensibilité et de l'inertie (en jours).
+### Innovations Techniques
+- **Timezone UTC** : Standardisation de toutes les sources de données (yfinance, blockchain.com) pour un alignement parfait au point "Maintenant".
+- **Difficulté Stochastique** : Intégration d'un bruit aléatoire quotidien pour simuler la réalité du réseau dès le premier jour de prédiction.
+- **Double Axe Y** : Tous les graphiques financiers affichent simultanément le BTC et sa contrevaleur en XPF.
+- **Opacité Dynamique** : Nuages Monte Carlo renforcés (alpha 0.12) pour une meilleure lecture des scénarios extrêmes.
 
-### Comment lancer l'application
+## Utilisation
+
+### Lancement
 ```bash
 streamlit run app.py
 ```
 
-## Setup Instructions
+### Paramètres Principaux
+- **Hardware** : Nombre de machines, Hashrate, Puissance (W).
+- **Réseau** : Frais de transaction moyens par bloc.
+- **OPEX** : Coût du kWh (XPF), Uptime (%), PUE.
+- **Financier** : CAPEX global et charges fixes mensuelles.
 
-### Virtual Environment
-This project uses a Python virtual environment to manage dependencies.
-
-1. **Active the environment**:
-   ```bash
-   source venv/bin/activate
-   ```
-
-2. **Install dependencies** (when available):
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-## Development
-Created and maintained with Antigravity.
+---
+Développement et maintenance via **Antigravity**.
